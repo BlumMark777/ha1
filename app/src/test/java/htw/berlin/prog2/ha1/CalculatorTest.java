@@ -90,5 +90,79 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+
+    //Test für die Multiplikation
+
+    @Test
+    @DisplayName("should allow multiplication")
+    void testMultiplication() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(5);
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(7);
+        calc.pressEqualsKey();
+
+        String expected = "35.0";
+        String actual = calc.readScreen();
+
+
+        assertEquals("35", calc.readScreen());
+    }
+
+    @Test
+    @DisplayName("should show zero on the screen")
+
+    void testSquareZero(){
+
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("√");
+
+
+        String expected = "0";
+        String actual = calc.readScreen();
+
+
+        assertEquals("0", calc.readScreen());
+    }
+
+    @Test
+    @DisplayName("should display one divided by every Number")
+
+    void testInverse() {
+
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressUnaryOperationKey("1/x");
+
+        String expected = "0.5";
+        String actual = calc.readScreen();
+
+
+        assertEquals("0.5", calc.readScreen());
+
+
+
+    }
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
 
