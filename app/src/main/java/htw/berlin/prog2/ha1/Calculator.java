@@ -32,9 +32,15 @@ public class Calculator {
     public void pressDigitKey(int digit) {
         if (digit > 9 || digit < 0) throw new IllegalArgumentException();
 
-        if (screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
+        //Veränderte Version der If-Schleife, damit aus - und 1 -1 wird wie beim Online-Calculator
 
-        screen = screen + digit;
+        if (screen.equals("0")) {
+            screen = Integer.toString(digit);
+        } else if (screen.equals("-")) {
+            screen = "-" + digit;
+        } else {
+            screen = screen + digit;
+        }
     }
 
     /**
@@ -62,8 +68,19 @@ public class Calculator {
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation) {
+
+        //if-Schleife, damit - als Vorzeichen erkannt wird
+
+        if(screen.equals("0") && operation.equals("-") ){
+            screen = "-";
+            return;
+        }
+
+
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
+
+
     }
 
 
@@ -87,7 +104,9 @@ public class Calculator {
 
         screen = Double.toString(result);
 
-        if (screen.equals("NaN") || screen.equals("Infinity")) screen = "Error";
+        //angepasste Version der If-Schleife, damit - ebenfalls berücksichtigt wird und Error ausgegeben wird
+
+        if (screen.equals("NaN") || screen.equals("Infinity") || screen.equals("-Infinity") ) screen = "Error";
         if (screen.endsWith(".0")) screen = screen.substring(0, screen.length() - 2);
         if (screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
     }

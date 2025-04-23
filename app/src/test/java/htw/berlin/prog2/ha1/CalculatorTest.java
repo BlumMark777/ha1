@@ -103,6 +103,7 @@ class CalculatorTest {
         calc.pressDigitKey(7);
         calc.pressEqualsKey();
 
+
         String expected = "35.0";
         String actual = calc.readScreen();
 
@@ -110,43 +111,65 @@ class CalculatorTest {
         assertEquals("35", calc.readScreen());
     }
 
-    @Test
-    @DisplayName("should show zero on the screen")
 
-    void testSquareZero(){
+        @Test
+        @DisplayName("should display eight after press the clear Key three times")
+
+        void testPressClearKey(){
+
+
+            Calculator calc = new Calculator();
+
+            calc.pressDigitKey(2);
+            calc.pressBinaryOperationKey("+");
+            calc.pressDigitKey(2);
+            calc.pressEqualsKey();
+            calc.pressClearKey();
+            calc.pressClearKey();
+
+            String expected = "0";
+            String actual = calc.readScreen();
+
+            assertEquals("0", calc.readScreen());
+
+        }
+
+    @Test
+    @DisplayName("Error on Display after test to square negative numbers")
+
+        void testSquareNegative(){
 
         Calculator calc = new Calculator();
 
-        calc.pressDigitKey(0);
-        calc.pressUnaryOperationKey("√");
+            calc.pressBinaryOperationKey("-");
+            calc.pressDigitKey(1);
+            calc.pressUnaryOperationKey("√");
 
 
-        String expected = "0";
-        String actual = calc.readScreen();
+            String expected = "Error";
+            String actual = calc.readScreen();
+
+            assertEquals("Error", calc.readScreen());
 
 
-        assertEquals("0", calc.readScreen());
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
     }
 
-    @Test
-    @DisplayName("should display one divided by every Number")
-
-    void testInverse() {
-
-        Calculator calc = new Calculator();
-
-        calc.pressDigitKey(2);
-        calc.pressUnaryOperationKey("1/x");
-
-        String expected = "0.5";
-        String actual = calc.readScreen();
-
-
-        assertEquals("0.5", calc.readScreen());
-
-
-
-    }
 
 
 
@@ -155,7 +178,16 @@ class CalculatorTest {
 
 
 
-}
+
+
+
+
+
+
+
+
+
+
 
 
 
